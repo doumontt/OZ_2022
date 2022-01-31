@@ -1,0 +1,32 @@
+functor
+import
+  ProjectLib
+  Browser
+  OS
+  System
+  Application
+define
+  ListOfCharacters = {ProjectLib.loadDatabase file 'database.txt'}
+  Browse = proc {$ B} {Browser.browse B} end
+  Print = proc{$ S} {System.print S} end
+
+  proc {buildT ListOfCharacters ListOfQuestions itt}
+    local Lt Lf in
+      for person in ListOfCharacters do
+        if {person.(ListOfQuestions.itt)} then
+          {Append listT person.1}
+        else
+          {Append listF person.1}
+        end
+      end
+      {Print listT}
+    end
+
+  end
+
+in
+  {Print {Arity ListOfCharacters.1}.2}
+  {buildT ListOfCharacters ({Arity ListOfCharacters.1}.2) 1}
+
+  {Application.exit 0}
+end
